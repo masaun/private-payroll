@@ -3,6 +3,7 @@
 ***
 ## 【Introduction of Private Invoice】
 - This is a dApp that ...
+- Private invoices (i.e. for receiving / sending salaries). Obscuring payments between two parties without revealing the amount.
 
 &nbsp;
 
