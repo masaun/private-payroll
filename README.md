@@ -64,3 +64,8 @@ http://127.0.0.1:3000/tellor-chainrunner-project
 ***
 
 ## 【References】
+- 【Protect Privacy🔐Hackathon】at Gitcoin
+  - Maker：https://gitcoin.co/issue/makerdao/community/585/4432
+  - Keep：https://gitcoin.co/issue/keep-network/Protect-Privacy-Hackathon/1/4457
+
+
