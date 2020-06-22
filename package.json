@@ -1,0 +1,28 @@
+{
+  "name": "private-invoice",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test:local": "truffle test ./test/* --network local",
+    "test:kovan": "truffle test ./test/* --network kovan",
+    "start-blank": "rm -rf client/src && cp -rf barebones/src client/",
+    "client": "cd client && npm run start",
+    "console:local": "truffle console --network local",
+    "compile:local": "truffle compile --reset --network local",
+    "migrate:local": "truffle migrate --reset --network local",
+    "console:kovan": "truffle console --network kovan",
+    "compile:kovan": "truffle compile --reset --network kovan",
+    "migrate:kovan": "truffle migrate --reset --network kovan"
+  },
+  "author": "masaun",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.5.0",
+    "@truffle/hdwallet-provider": "^1.0.29",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {}
+}
