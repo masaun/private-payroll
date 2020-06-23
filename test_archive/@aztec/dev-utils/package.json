@@ -1,0 +1,86 @@
+{
+  "_from": "@aztec/dev-utils@2.4.0",
+  "_id": "@aztec/dev-utils@2.4.0",
+  "_inBundle": false,
+  "_integrity": "sha512-nae1MGgDTUzuYKX0F+0SIaI9ENaEmjTEPgFUZW9+RgnIHBpBAqSd62+G5wwPOwGVKJ8n1hCtj7DgWf5TH06bNA==",
+  "_location": "/@aztec/dev-utils",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@aztec/dev-utils@2.4.0",
+    "name": "@aztec/dev-utils",
+    "escapedName": "@aztec%2fdev-utils",
+    "scope": "@aztec",
+    "rawSpec": "2.4.0",
+    "saveSpec": null,
+    "fetchSpec": "2.4.0"
+  },
+  "_requiredBy": [
+    "/",
+    "/@aztec/bn128",
+    "/@aztec/note-access",
+    "/aztec.js"
+  ],
+  "_resolved": "https://registry.npmjs.org/@aztec/dev-utils/-/dev-utils-2.4.0.tgz",
+  "_shasum": "307fa853190bc14c7d11147d0ddc7267e87c626f",
+  "_spec": "@aztec/dev-utils@2.4.0",
+  "_where": "/Users/unomasanori/projects/DEMO_MVP/Protect Privacy🔐/private-invoice",
+  "author": {
+    "name": "AZTEC"
+  },
+  "bugs": {
+    "url": "https://github.com/AztecProtocol/AZTEC/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bn.js": "^4.11.8"
+  },
+  "deprecated": false,
+  "description": "Dev utils library for AZTEC packages",
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "shx": "^0.3.2"
+  },
+  "engines": {
+    "node": ">=8.3"
+  },
+  "files": [
+    "/lib"
+  ],
+  "homepage": "https://github.com/AztecProtocol/AZTEC/tree/master/packages/dev-utils#readme",
+  "keywords": [
+    "aztec",
+    "blockchain",
+    "confidentiality",
+    "cryptography",
+    "ethereum",
+    "privacy",
+    "protocol"
+  ],
+  "license": "LGPL-3.0",
+  "main": "./lib",
+  "name": "@aztec/dev-utils",
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AztecProtocol/AZTEC.git"
+  },
+  "scripts": {
+    "build": "yarn clean && babel --copy-files --out-dir ./lib --root-mode upward ./src",
+    "build:dev": "yarn clean && babel --copy-files --out-dir ./lib --root-mode upward ./src",
+    "build:prod": "yarn build",
+    "clean": "shx rm -rf ./lib",
+    "has:changed": "bash ../monorepo-scripts/ci/hasChanged.sh dev-utils",
+    "lint": "eslint --ignore-path ../../.eslintignore .",
+    "watch": "yarn build:dev --watch"
+  },
+  "version": "2.4.0"
+}

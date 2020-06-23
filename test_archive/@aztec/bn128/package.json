@@ -1,0 +1,92 @@
+{
+  "_from": "@aztec/bn128@1.3.2",
+  "_id": "@aztec/bn128@1.3.2",
+  "_inBundle": false,
+  "_integrity": "sha512-PWvxqV/xlg17+qyKh97bT2nQ8Xa4FgQscEH2kwnOdx0YHd3ZILplVTB5Sm7udeuvMjn2wEW+otF1qMAUsJUF4g==",
+  "_location": "/@aztec/bn128",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@aztec/bn128@1.3.2",
+    "name": "@aztec/bn128",
+    "escapedName": "@aztec%2fbn128",
+    "scope": "@aztec",
+    "rawSpec": "1.3.2",
+    "saveSpec": null,
+    "fetchSpec": "1.3.2"
+  },
+  "_requiredBy": [
+    "/",
+    "/aztec.js"
+  ],
+  "_resolved": "https://registry.npmjs.org/@aztec/bn128/-/bn128-1.3.2.tgz",
+  "_shasum": "2d7358434b0db7b3ffe3588d5a8ea8385aecf53d",
+  "_spec": "@aztec/bn128@1.3.2",
+  "_where": "/Users/unomasanori/projects/DEMO_MVP/Protect Privacy🔐/private-invoice",
+  "author": {
+    "name": "AZTEC"
+  },
+  "browser": "./dist/bundle.web.js",
+  "bugs": {
+    "url": "https://github.com/AztecProtocol/AZTEC/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@aztec/dev-utils": "2.4.0",
+    "bn.js": "^4.11.8",
+    "elliptic": "^6.4.1",
+    "web3-utils": "^1.0.0-beta.55"
+  },
+  "deprecated": false,
+  "description": "JS helper library for a Barreto-Naehrig pairing friendly curve",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "chai": "^4.2.0",
+    "copy-webpack-plugin": "^5.0.3",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.2",
+    "shx": "^0.3.2",
+    "webpack-bundle-analyzer": "^3.6.0"
+  },
+  "engines": {
+    "node": ">=8.3"
+  },
+  "files": [
+    "/dist"
+  ],
+  "homepage": "https://github.com/AztecProtocol/AZTEC/tree/master/packages/bn128#readme",
+  "keywords": [
+    "aztec",
+    "blockchain",
+    "confidentiality",
+    "cryptography",
+    "ethereum",
+    "privacy",
+    "protocol"
+  ],
+  "license": "LGPL-3.0",
+  "main": "./dist/bundle.node.js",
+  "name": "@aztec/bn128",
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AztecProtocol/AZTEC.git"
+  },
+  "scripts": {
+    "build": "webpack --config ./webpack.dev.js",
+    "build:dev": "webpack --config ./webpack.dev.js",
+    "build:prod": "webpack --config ./webpack.prod.js",
+    "clean": "shx rm -rf ./dist || true",
+    "has:changed": "bash ../monorepo-scripts/ci/hasChanged.sh bn128",
+    "lint": "eslint --ignore-path ../../.eslintignore .",
+    "test": "NODE_ENV=TEST mocha --require @babel/polyfill --require @babel/register ./test --bail --colors --exit --recursive --reporter spec --timeout 0 --trace-warnings",
+    "watch": "yarn build:dev --watch"
+  },
+  "version": "1.3.2"
+}
