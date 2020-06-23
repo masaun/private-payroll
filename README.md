@@ -69,4 +69,13 @@ http://127.0.0.1:3000/tellor-chainrunner-project
   - Maker：https://gitcoin.co/issue/makerdao/community/585/4432
   - Keep：https://gitcoin.co/issue/keep-network/Protect-Privacy-Hackathon/1/4457
 
+<br>
+
+- [Aztec]
+  - aztec-ganache-starter-kit
+    https://github.com/AztecProtocol/aztec-ganache-starter-kit
+
+  - [Doc]：aztec.js
+    - API methons list：https://aztecprotocol.github.io/AZTEC/
+    - a brief explanation： https://docs.aztecprotocol.com/#/aztec.js
 

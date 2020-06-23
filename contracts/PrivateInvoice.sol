@@ -31,7 +31,12 @@ contract PrivateInvoice is OwnableOriginal(msg.sender), McModifier, McConstants 
     }
 
 
-    function testFunc() public {}
+    function _confidentialMint(uint24 _proof, bytes memory _proofData) public {
+        zkAssetMintable.confidentialMint(_proof, _proofData);
+    }
+
+
+
 
 
     /***
