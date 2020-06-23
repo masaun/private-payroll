@@ -1,0 +1,100 @@
+{
+  "_from": "@aztec/secp256k1@1.2.0",
+  "_id": "@aztec/secp256k1@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha512-GK2RkvDS73TJ/NQuiFbnKHTTStEO1aqYlwFDH54U2WcvwWvFjeME2VZpjI7J9DY4Ofjgl4rXsmSGwBYh5+Qw4A==",
+  "_location": "/@aztec/secp256k1",
+  "_phantomChildren": {
+    "bn.js": "4.11.9",
+    "elliptic": "6.5.3",
+    "ethereum-bloom-filters": "1.0.7",
+    "ethjs-unit": "0.1.6",
+    "number-to-bn": "1.7.0",
+    "randombytes": "2.1.0",
+    "underscore": "1.9.1",
+    "utf8": "3.0.0",
+    "xhr-request-promise": "0.1.3"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@aztec/secp256k1@1.2.0",
+    "name": "@aztec/secp256k1",
+    "escapedName": "@aztec%2fsecp256k1",
+    "scope": "@aztec",
+    "rawSpec": "1.2.0",
+    "saveSpec": null,
+    "fetchSpec": "1.2.0"
+  },
+  "_requiredBy": [
+    "/",
+    "/@aztec/note-access",
+    "/aztec.js"
+  ],
+  "_resolved": "https://registry.npmjs.org/@aztec/secp256k1/-/secp256k1-1.2.0.tgz",
+  "_shasum": "99b65bc25dbdf517ea9c7c63b9927d5341f6fcee",
+  "_spec": "@aztec/secp256k1@1.2.0",
+  "_where": "/Users/unomasanori/projects/DEMO_MVP/Protect Privacy🔐/private-invoice",
+  "author": {
+    "name": "AZTEC"
+  },
+  "bugs": {
+    "url": "https://github.com/AztecProtocol/AZTEC/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bn.js": "^4.11.8",
+    "elliptic": "^6.4.1",
+    "web3-utils": "1.2.4"
+  },
+  "deprecated": false,
+  "description": "Javascript wrapper around the secp256k1 curve",
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "chai": "^4.2.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.2",
+    "shx": "^0.3.2"
+  },
+  "engines": {
+    "node": ">=8.3"
+  },
+  "files": [
+    "/lib"
+  ],
+  "homepage": "https://github.com/AztecProtocol/AZTEC/tree/master/packages/secp256k1#readme",
+  "keywords": [
+    "aztec",
+    "blockchain",
+    "confidentiality",
+    "cryptography",
+    "ethereum",
+    "privacy",
+    "protocol"
+  ],
+  "license": "LGPL-3.0",
+  "main": "./lib",
+  "name": "@aztec/secp256k1",
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AztecProtocol/AZTEC.git"
+  },
+  "scripts": {
+    "build": "yarn clean && babel --copy-files --out-dir ./lib --root-mode upward ./src",
+    "build:dev": "yarn clean && babel --copy-files --out-dir ./lib --root-mode upward ./src",
+    "build:prod": "yarn build",
+    "clean": "shx rm -rf ./lib",
+    "has:changed": "bash ../monorepo-scripts/ci/hasChanged.sh secp256k1",
+    "lint": "eslint --ignore-path ../../.eslintignore .",
+    "test": "mocha ./test --bail --colors --exit --recursive --reporter spec --timeout 0 --trace-warnings",
+    "watch": "yarn build:dev --watch"
+  },
+  "version": "1.2.0"
+}

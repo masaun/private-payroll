@@ -1,7 +1,7 @@
-pragma solidity ^0.5.17;
+pragma solidity ^0.5.16;
 pragma experimental ABIEncoderV2;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 
 // Use original Ownable.sol
 import "./lib/OwnableOriginal.sol";
@@ -10,6 +10,9 @@ import "./lib/OwnableOriginal.sol";
 import "./storage/McModifier.sol";  /// McStorage.sol is inherited
 import "./storage/McConstants.sol";
 
+/// Aztec
+import "@aztec/protocol/contracts/ERC1724/ZkAsset.sol";
+import "@aztec/protocol/contracts/ERC1724/ZkAssetMintable.sol";
 
 
 /***
@@ -17,9 +20,13 @@ import "./storage/McConstants.sol";
  **/
 contract PrivateInvoice is OwnableOriginal(msg.sender), McModifier, McConstants {
 
+    ZkAsset public zkAsset;
+    ZkAssetMintable public zkAssetMintable;
     IERC20 public dai;
 
-    constructor(address _daiAddress) public {
+    constructor(address _daiAddress, address _zkAsset, address _zkAssetMintable) public {
+        zkAsset = ZkAsset(_zkAsset);
+        zkAssetMintable = ZkAssetMintable(_zkAssetMintable);
         dai = IERC20(_daiAddress);
     }
 
