@@ -7,6 +7,7 @@
   },
   "scripts": {
     "test:local": "truffle test ./test/* --network local",
+    "test:aztec": "truffle test ./test/@aztec/demo.js --network local",
     "test:kovan": "truffle test ./test/* --network kovan",
     "start-blank": "rm -rf client/src && cp -rf barebones/src client/",
     "client": "cd client && npm run start",
@@ -20,9 +21,11 @@
   "author": "masaun",
   "license": "MIT",
   "dependencies": {
+    "openzeppelin-solidity": "^2.2.0",
     "@truffle/hdwallet-provider": "^1.0.29",
     "dotenv": "^8.2.0",
 
+    "web3": "^1.0.0-beta.51",
     "@aztec/protocol": "^1.7.0",
     "@aztec/bn128": "1.3.2",
     "@aztec/dev-utils": "2.4.0",

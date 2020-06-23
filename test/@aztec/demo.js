@@ -1,4 +1,5 @@
-import utils from "@aztec/dev-utils";
+//import utils from "@aztec/dev-utils";
+const utils = require("@aztec/dev-utils");
 
 const aztec = require("aztec.js");
 const dotenv = require("dotenv");
