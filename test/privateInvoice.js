@@ -18,20 +18,6 @@ const PrivateInvoice = artifacts.require("./PrivateInvoice.sol");
 const ZkAssetMintable = artifacts.require("./ZkAssetMintable.sol");
 
 
-advanceTime = (time) => {
-    return new Promise((resolve, reject) => {
-        web3.currentProvider.send({
-            jsonrpc: "2.0",
-            method: "evm_increaseTime",
-            params: [time],
-            id: new Date().getTime()
-        }, (err, result) => {
-            if (err) { return reject(err); }
-            return resolve(result);
-        });
-    });
-}
-
 contract('Private Invoice Tests', function(accounts) {
     let instance1;
     let instance2;
@@ -72,7 +58,51 @@ contract('Private Invoice Tests', function(accounts) {
 
         const _proof = MINT_PROOF;
         const _proofData = mintData;
-        privateInvoice._confidentialMint(_proof, _proofData, { from: accounts[0] });
+        await privateInvoice._confidentialMint(_proof, _proofData, { from: accounts[0] });
+
+        console.log("completed mint proof");
+        console.log("Bob successfully deposited 100");
+
+
+        // -------------------------------------------------------------------------- //
+
+        // bob needs to pay sally for a taxi
+        // the taxi is 25
+        // if bob pays with his note worth 100 he requires 75 change
+        console.log("Bob takes a taxi, Sally is the driver");
+        const sallyTaxiFee = await aztec.note.create(sally.publicKey, 25);
+
+        console.log("The fare comes to 25");
+        const bobNote2 = await aztec.note.create(bob.publicKey, 75);
+        const sendProofSender = accounts[0];
+        const withdrawPublicValue = 0;
+        const publicOwner = accounts[0];
+
+        const sendProof = new JoinSplitProof(
+            mintedNotes,
+            [sallyTaxiFee, bobNote2],
+            sendProofSender,
+            withdrawPublicValue,
+            publicOwner
+        );
+        const sendProofData = sendProof.encodeABI(privateInvoice.address);
+        const sendProofSignatures = sendProof.constructSignatures(
+            privateInvoice.address,
+            [bob]
+        );
+
+        await privateInvoice._confidentialTransfer(sendProofData, sendProofSignatures, { from: accounts[0] });
+        //await privateInvoice.methods._confidentialTransfer(sendProofData, sendProofSignatures).send({ from: accounts[0] });
+        
+        // await privateInvoice.methods["confidentialTransfer(bytes,bytes)"](
+        //     sendProofData,
+        //     sendProofSignatures,
+        //     {
+        //         from: accounts[0]
+        //     }
+        // );
+
+        console.log("Bob paid sally 25 for the taxi and gets 75 back");
     });
 
     it("Test 2", async function() {});
