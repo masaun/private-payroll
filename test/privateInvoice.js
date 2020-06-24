@@ -22,6 +22,7 @@ contract('Private Invoice Tests', function(accounts) {
     let instance1;
     let instance2;
     let privateInvoice;
+    let privatePaymentContract;
     let bob;
     let sally;
 
@@ -29,6 +30,7 @@ contract('Private Invoice Tests', function(accounts) {
 
     it("Setup", async function() {
         privateInvoice = await PrivateInvoice.deployed();
+        privatePaymentContract = await ZkAssetMintable.deployed();
 
         bob = secp256k1.accountFromPrivateKey(
             process.env.GANACHE_TESTING_ACCOUNT_0
@@ -58,7 +60,7 @@ contract('Private Invoice Tests', function(accounts) {
 
         const _proof = MINT_PROOF;
         const _proofData = mintData;
-        await privateInvoice._confidentialMint(_proof, _proofData, { from: accounts[0] });
+        privatePaymentContract.confidentialMint(_proof, _proofData, { from: accounts[0] });
 
         console.log("completed mint proof");
         console.log("Bob successfully deposited 100");
@@ -85,25 +87,24 @@ contract('Private Invoice Tests', function(accounts) {
             withdrawPublicValue,
             publicOwner
         );
-        const sendProofData = sendProof.encodeABI(privateInvoice.address);
+        const sendProofData = sendProof.encodeABI(privatePaymentContract.address);
         const sendProofSignatures = sendProof.constructSignatures(
-            privateInvoice.address,
+            privatePaymentContract.address,
             [bob]
         );
-
-        await privateInvoice._confidentialTransfer(sendProofData, sendProofSignatures, { from: accounts[0] });
-        //await privateInvoice.methods._confidentialTransfer(sendProofData, sendProofSignatures).send({ from: accounts[0] });
-        
-        // await privateInvoice.methods["confidentialTransfer(bytes,bytes)"](
-        //     sendProofData,
-        //     sendProofSignatures,
-        //     {
-        //         from: accounts[0]
-        //     }
-        // );
+  
+        await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
+            sendProofData,
+            sendProofSignatures,
+            {
+                from: accounts[0]
+            }
+        );
 
         console.log("Bob paid sally 25 for the taxi and gets 75 back");
+
     });
+
 
     it("Test 2", async function() {});
 })
