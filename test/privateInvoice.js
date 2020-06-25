@@ -93,13 +93,15 @@ contract('Private Invoice Tests', function(accounts) {
             [bob]
         );
   
-        await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
+        // await privatePaymentContract.confidentialTransfer(sendProofData, sendProofSignatures, { from: accounts[0] });
+        let res = await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
             sendProofData,
             sendProofSignatures,
             {
                 from: accounts[0]
             }
         );
+        //console.log('=== confidentialTransfer() ===', res);
 
         console.log("Bob paid sally 25 for the taxi and gets 75 back");
 

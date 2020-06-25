@@ -16,7 +16,7 @@ import "@aztec/protocol/contracts/ERC1724/ZkAssetMintable.sol";
 
 
 /***
- * @notice - This contract is that ...
+ * @notice - This contract is that Private Salary Distributing System 
  **/
 contract PrivateInvoice is OwnableOriginal(msg.sender), McModifier, McConstants {
 
@@ -29,6 +29,17 @@ contract PrivateInvoice is OwnableOriginal(msg.sender), McModifier, McConstants 
         zkAssetMintable = ZkAssetMintable(_zkAssetMintable);
         dai = IERC20(_daiAddress);
     }
+
+
+    function depositSalary() public returns (bool) {
+        
+    }
+
+    function transferSalary() public returns (bool) {
+        
+    }
+    
+    
 
 
     // function _confidentialMint(uint24 _proof, bytes memory _proofData) public {

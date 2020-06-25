@@ -20,7 +20,7 @@ const {
 
 
 module.exports = async (deployer, network) => {
-  if (network === 'local') {
+  if (network === 'local' || 'rinkeby' || 'kovan' || 'ropsten') {
     await deployer.deploy(ACE);
     await deployer.deploy(JoinSplitFluid);
     await deployer.deploy(Swap);

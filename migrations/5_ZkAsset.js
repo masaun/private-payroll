@@ -8,7 +8,7 @@ module.exports = async (deployer, network) => {
   const testERC20 = await TestERC20.deployed();
 
   let aceContract;
-  if (network === 'local') {
+  if (network === 'local' || 'rinkeby' || 'kovan' || 'ropsten') {
     aceContract = await ACE.deployed();
     // initialise the ZkAsset with an ERC20 equivilant
     await deployer.deploy(
