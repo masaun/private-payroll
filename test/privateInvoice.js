@@ -60,7 +60,8 @@ contract('Private Invoice Tests', function(accounts) {
 
         const _proof = MINT_PROOF;
         const _proofData = mintData;
-        privatePaymentContract.confidentialMint(_proof, _proofData, { from: accounts[0] });
+        let res1 = await privatePaymentContract.confidentialMint(_proof, _proofData, { from: accounts[0] });
+        console.log('=== confidentialMint() ===\n', res1);
 
         console.log("completed mint proof");
         console.log("Bob successfully deposited 100");
@@ -94,7 +95,7 @@ contract('Private Invoice Tests', function(accounts) {
         );
   
         // await privatePaymentContract.confidentialTransfer(sendProofData, sendProofSignatures, { from: accounts[0] });
-        let res = await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
+        let res2 = await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
             sendProofData,
             sendProofSignatures,
             {
