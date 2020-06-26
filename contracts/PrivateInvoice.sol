@@ -24,7 +24,7 @@ contract PrivateInvoice is ZkAssetMintable, OwnableOriginal(msg.sender), McModif
     //ZkAssetMintable public zkAssetMintable;
     IERC20 public dai;
 
-    constructor(address _daiAddress, address _zkAsset, address _zkAssetMintable) public {
+    constructor(address _daiAddress, address _aceAddress, address _zkAsset) public ZkAssetMintable(_aceAddress, address(0), 1, true, false) {
         zkAsset = ZkAsset(_zkAsset);
         //zkAssetMintable = ZkAssetMintable(_zkAssetMintable);
         dai = IERC20(_daiAddress);
