@@ -18,15 +18,15 @@ import "@aztec/protocol/contracts/ERC1724/ZkAssetMintable.sol";
 /***
  * @notice - This contract is that Private Salary Distributing System 
  **/
-contract PrivateInvoice is OwnableOriginal(msg.sender), McModifier, McConstants {
+contract PrivateInvoice is ZkAssetMintable, OwnableOriginal(msg.sender), McModifier, McConstants {
 
     ZkAsset public zkAsset;
-    ZkAssetMintable public zkAssetMintable;
+    //ZkAssetMintable public zkAssetMintable;
     IERC20 public dai;
 
     constructor(address _daiAddress, address _zkAsset, address _zkAssetMintable) public {
         zkAsset = ZkAsset(_zkAsset);
-        zkAssetMintable = ZkAssetMintable(_zkAssetMintable);
+        //zkAssetMintable = ZkAssetMintable(_zkAssetMintable);
         dai = IERC20(_daiAddress);
     }
 
