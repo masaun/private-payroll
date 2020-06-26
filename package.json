@@ -7,6 +7,7 @@
   },
   "scripts": {
     "test:local": "truffle test ./test/* --network local",
+    "test:rinkeby": "truffle test ./test/* --network rinkeby",
     "test:aztec": "truffle test ./test/@aztec/demo.js --network local",
     "test:kovan": "truffle test ./test/* --network kovan",
     "start-blank": "rm -rf client/src && cp -rf barebones/src client/",

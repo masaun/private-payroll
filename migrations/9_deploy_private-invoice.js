@@ -17,16 +17,25 @@ const _zkAssetMintable = ZkAssetMintable.address;
 
 module.exports = async function(deployer, network, accounts) {
 
-    let ownerAddress = walletAddressList["WalletAddress1"];
+    /***
+     * @notice - Use for test only
+     **/
+    await deployer.deploy(PrivateInvoice, daiAddress, _zkAsset, _zkAssetMintable);
 
-    await deployer.deploy(PrivateInvoice, daiAddress, _zkAsset, _zkAssetMintable)
-                  .then(async function(privateInvoice) {
-                      if(ownerAddress && ownerAddress!="") {
-                          console.log(`=== Transfering ownership to address ${ownerAddress} ===`)
-                          await privateInvoice.transferOwnership(ownerAddress);
-                      }
-                  }
-    );
+
+    /***
+     * @notice - Use for deploying on testnet
+     **/
+    // let ownerAddress = walletAddressList["WalletAddress1"];
+
+    // await deployer.deploy(PrivateInvoice, daiAddress, _zkAsset, _zkAssetMintable)
+    //               .then(async function(privateInvoice) {
+    //                   if(ownerAddress && ownerAddress!="") {
+    //                       console.log(`=== Transfering ownership to address ${ownerAddress} ===`)
+    //                       await privateInvoice.transferOwnership(ownerAddress);
+    //                   }
+    //               }
+    // );
 
     //@dev - Transfer 2.1 DAI from deployer's address to contract address in advance
     // const TellorChainrunnerProject = await TellorChainrunnerProject.deployed();

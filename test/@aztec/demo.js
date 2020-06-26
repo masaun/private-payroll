@@ -36,7 +36,7 @@ contract("Private payment", accounts => {
     const sender = accounts[0];
     const mintedNotes = [bobNote1];
 
-    const mintProof = new MintProof(
+    const mintProof = new MintProof(   /// MintProof instance is called from aztec.js
       zeroMintCounterNote,
       newMintCounterNote,
       mintedNotes,
