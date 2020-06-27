@@ -1,6 +1,6 @@
 const ACE = artifacts.require('./ACE.sol');
 const ZkAsset = artifacts.require('./ZkAsset.sol');
-const ZkAssetMintable = artifacts.require('./ZkAssetMintable.sol');
+//const ZkAssetMintable = artifacts.require('./ZkAssetMintable.sol');
 const Dai = artifacts.require("Dai");
 //const TestERC20 = artifacts.require('./TestERC20.sol');
 
@@ -22,12 +22,12 @@ module.exports = async (deployer, network) => {
     );
 
     // initialize the private asset 
-    await deployer.deploy(ZkAssetMintable,
-      aceContract.address,                             /// _aceAddress
-      '0x0000000000000000000000000000000000000000',    /// _linkedTokenAddress
-      1,                                               /// _scalingFactor
-      0,                                               /// _optionalMintProofId
-      [],                                              /// _optionalInitialisationMint
-    );
+    // await deployer.deploy(ZkAssetMintable,
+    //   aceContract.address,                             /// _aceAddress
+    //   '0x0000000000000000000000000000000000000000',    /// _linkedTokenAddress
+    //   1,                                               /// _scalingFactor
+    //   0,                                               /// _optionalMintProofId
+    //   [],                                              /// _optionalInitialisationMint
+    // );
   }
 };
