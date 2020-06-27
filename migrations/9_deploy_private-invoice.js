@@ -15,6 +15,9 @@ const _aceAddress = ACE.address;
 const _zkAsset = ZkAsset.address;
 //const _zkAssetMintable = ZkAssetMintable.address;
 
+const _optionalMintProofId = 0;
+const _optionalInitialisationMint = [];
+
 //const depositedAmount = web3.utils.toWei("0.15");    // 0.15 DAI which is deposited in deployed contract. 
 
 module.exports = async function(deployer, network, accounts) {
@@ -22,7 +25,7 @@ module.exports = async function(deployer, network, accounts) {
     /***
      * @notice - Use for test only
      **/
-    await deployer.deploy(PrivateInvoice, daiAddress, _aceAddress, _zkAsset);
+    await deployer.deploy(PrivateInvoice, daiAddress, _aceAddress, _optionalMintProofId, _optionalInitialisationMint, _zkAsset);
     //await deployer.deploy(PrivateInvoice, daiAddress, _zkAsset, _zkAssetMintable);
 
 
