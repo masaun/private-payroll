@@ -15,14 +15,14 @@ const {
 const { JoinSplitProof, MintProof } = aztec;
 
 const PrivateInvoice = artifacts.require("./PrivateInvoice.sol");
-const ZkAssetMintable = artifacts.require("./ZkAssetMintable.sol");
+//const ZkAssetMintable = artifacts.require("./ZkAssetMintable.sol");
 
 
 contract('Private Invoice Tests', function(accounts) {
     let instance1;
     let instance2;
     let privateInvoice;
-    let privatePaymentContract;
+    //let privatePaymentContract;
     let bob;
     let sally;
 
@@ -30,7 +30,7 @@ contract('Private Invoice Tests', function(accounts) {
 
     it("Setup", async function() {
         privateInvoice = await PrivateInvoice.deployed();
-        privatePaymentContract = await ZkAssetMintable.deployed();
+        //privatePaymentContract = await ZkAssetMintable.deployed();
 
         bob = secp256k1.accountFromPrivateKey(
             process.env.GANACHE_TESTING_ACCOUNT_0
@@ -60,7 +60,8 @@ contract('Private Invoice Tests', function(accounts) {
 
         const _proof = MINT_PROOF;
         const _proofData = mintData;
-        let res1 = await privatePaymentContract.confidentialMint(_proof, _proofData, { from: accounts[0] });
+        let res1 = await privateInvoice.confidentialMint(_proof, _proofData, { from: accounts[0] });
+        //let res1 = await privatePaymentContract.confidentialMint(_proof, _proofData, { from: accounts[0] });
         console.log('=== confidentialMint() ===\n', res1);
 
         console.log("completed mint proof");
@@ -88,20 +89,30 @@ contract('Private Invoice Tests', function(accounts) {
             withdrawPublicValue,
             publicOwner
         );
-        const sendProofData = sendProof.encodeABI(privatePaymentContract.address);
+        const sendProofData = sendProof.encodeABI(privateInvoice.address);
+        //const sendProofData = sendProof.encodeABI(privatePaymentContract.address);
         const sendProofSignatures = sendProof.constructSignatures(
-            privatePaymentContract.address,
+            privateInvoice.address,
+            //privatePaymentContract.address,
             [bob]
         );
-  
-        // await privatePaymentContract.confidentialTransfer(sendProofData, sendProofSignatures, { from: accounts[0] });
-        let res2 = await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
+
+        let res2 = await privateInvoice.methods["confidentialTransfer(bytes,bytes)"](
             sendProofData,
             sendProofSignatures,
             {
                 from: accounts[0]
             }
         );
+
+        // await privatePaymentContract.confidentialTransfer(sendProofData, sendProofSignatures, { from: accounts[0] });
+        // let res2 = await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
+        //     sendProofData,
+        //     sendProofSignatures,
+        //     {
+        //         from: accounts[0]
+        //     }
+        // );
         //console.log('=== confidentialTransfer() ===', res);
 
         console.log("Bob paid sally 25 for the taxi and gets 75 back");

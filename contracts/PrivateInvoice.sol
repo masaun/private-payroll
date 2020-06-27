@@ -45,7 +45,7 @@ contract PrivateInvoice is ZkAssetMintable, OwnableOriginal(msg.sender), McModif
         
     }
     
-    
+
 
 
     // function _confidentialMint(uint24 _proof, bytes memory _proofData) public {
