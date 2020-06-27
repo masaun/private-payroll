@@ -11,7 +11,7 @@ import "./storage/McModifier.sol";  /// McStorage.sol is inherited
 import "./storage/McConstants.sol";
 
 /// Aztec
-import "@aztec/protocol/contracts/ERC1724/ZkAsset.sol";
+import "@aztec/protocol/contracts/interfaces/IZkAsset.sol";
 import "@aztec/protocol/contracts/ERC1724/ZkAssetMintable.sol";
 
 
@@ -20,7 +20,7 @@ import "@aztec/protocol/contracts/ERC1724/ZkAssetMintable.sol";
  **/
 contract PrivateInvoice is ZkAssetMintable, OwnableOriginal(msg.sender), McModifier, McConstants {
 
-    ZkAsset public zkAsset;
+    IZkAsset public zkAsset;
     //ZkAssetMintable public zkAssetMintable;
     IERC20 public dai;
 
@@ -31,7 +31,7 @@ contract PrivateInvoice is ZkAssetMintable, OwnableOriginal(msg.sender), McModif
         bytes memory _optionalInitialisationMint,
         address _zkAsset
     ) public ZkAssetMintable(_aceAddress, address(0), 1, _optionalMintProofId, _optionalInitialisationMint) {
-        zkAsset = ZkAsset(_zkAsset);
+        zkAsset = IZkAsset(_zkAsset);
         //zkAssetMintable = ZkAssetMintable(_zkAssetMintable);
         dai = IERC20(_daiAddress);
     }
