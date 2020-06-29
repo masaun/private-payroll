@@ -50,7 +50,8 @@ contract('Private Invoice Factory Tests', function(accounts) {
 
         const newMintCounterNote = await aztec.note.create(bob.publicKey, 100);
         const zeroMintCounterNote = await aztec.note.createZeroValueNote();
-        const sender = accounts[0];
+        const sender = privateInvoiceFactory.address;
+        //const sender = accounts[0];
         const mintedNotes = [bobNote1];
 
         const mintProof = new MintProof(   /// MintProof instance is called from aztec.js
