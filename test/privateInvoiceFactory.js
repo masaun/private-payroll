@@ -41,6 +41,20 @@ contract('Private Invoice Factory Tests', function(accounts) {
         );
     });
 
+    // it("Get proofData", async function() {
+    //     const notionalNote = await aztec.note.create(bob.publicKey, 100);
+    //     const { noteHash: notionalNoteHash } = notionalNote.exportNote();
+
+    //     const newTotalNote = await aztec.note.create(bob.publicKey, 100);
+    //     const oldTotalNote = await aztec.note.createZeroValueNote();
+    //     const { proofData } = aztec.proof.mint.encodeMintTransaction({ newTotalMinted: newTotalNote,
+    //                                                                    oldTotalMinted: oldTotalNote,
+    //                                                                    adjustedNotes: [notionalNote],
+    //                                                                    senderAddress: loanDappContract.address });
+
+    //     return { notionalNoteHash, proofData };
+    // });
+
     it('Should be able to create a new privateInvoice', async () => {
         const _proofData = await web3.utils.randomHex(32);
         console.log('=== _proofData ===', _proofData);
