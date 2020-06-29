@@ -35,6 +35,23 @@ contract PrivateInvoiceFactory {
     }
 
 
+    function createInvoice(
+        address _daiAddress, 
+        address _aceAddress, 
+        uint24 _optionalMintProofId,
+        bytes memory _optionalInitialisationMint,
+        address _zkAsset,
+        bytes memory _proofData
+    ) public returns (bool){
+        address invoiceId = _createInvoice(_daiAddress, 
+                                           _aceAddress, 
+                                           _optionalMintProofId,
+                                           _optionalInitialisationMint,
+                                           _zkAsset,
+                                           _proofData);
+    }
+    
+
     function _createInvoice(
         address _daiAddress, 
         address _aceAddress, 

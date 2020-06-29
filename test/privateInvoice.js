@@ -19,8 +19,6 @@ const PrivateInvoice = artifacts.require("./PrivateInvoice.sol");
 
 
 contract('Private Invoice Tests', function(accounts) {
-    let instance1;
-    let instance2;
     let privateInvoice;
     //let privatePaymentContract;
     let bob;
@@ -62,7 +60,7 @@ contract('Private Invoice Tests', function(accounts) {
         const _proofData = mintData;
         let res1 = await privateInvoice.confidentialMint(_proof, _proofData, { from: accounts[0] });
         //let res1 = await privatePaymentContract.confidentialMint(_proof, _proofData, { from: accounts[0] });
-        console.log('=== confidentialMint() ===\n', res1);
+        //console.log('=== confidentialMint() ===\n', res1);
 
         console.log("completed mint proof");
         console.log("Bob successfully deposited 100");
