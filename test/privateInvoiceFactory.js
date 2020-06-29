@@ -80,7 +80,6 @@ contract('Private Invoice Factory Tests', function(accounts) {
         var _proof;
         var _proofData;
         _proof, _proofData = await getProofData();
-        //const _proofData = await web3.utils.randomHex(32);
         console.log('=== _proofData ===', _proofData);
 
         const _optionalMintProofId = 0;
@@ -92,9 +91,6 @@ contract('Private Invoice Factory Tests', function(accounts) {
                                                   _optionalInitialisationMint, 
                                                   zKerc20.address, 
                                                   _proofData);
-
-        //const firstLoanAddress = await loanDappContract.loans(0);
-        //assert.equal(firstLoanAddress > 0, true);
     });
 
 })
