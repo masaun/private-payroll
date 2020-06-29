@@ -1,5 +1,6 @@
 const ACE = artifacts.require('./ACE.sol');
-const ZkAsset = artifacts.require('./ZkAsset.sol');
+const ZKERC20 = artifacts.require('./ZKERC20/ZKERC20.sol');
+//const ZkAsset = artifacts.require('./ZkAsset.sol');
 //const ZkAssetMintable = artifacts.require('./ZkAssetMintable.sol');
 const Dai = artifacts.require("Dai");
 //const TestERC20 = artifacts.require('./TestERC20.sol');
@@ -14,7 +15,8 @@ module.exports = async (deployer, network) => {
     aceContract = await ACE.deployed();
     // initialise the ZkAsset with an ERC20 equivilant
     await deployer.deploy(
-      ZkAsset,
+      ZKERC20,
+      //ZkAsset,
       aceContract.address,  /// _aceAddress
       Dai.address,          /// _linkedTokenAddress
       //testERC20.address,  /// _linkedTokenAddress
