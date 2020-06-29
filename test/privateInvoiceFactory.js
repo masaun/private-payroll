@@ -19,6 +19,7 @@ const ACE = artifacts.require('./ACE.sol');
 const ZKERC20 = artifacts.require('./ZKERC20/ZKERC20.sol');
 const Dai = artifacts.require("Dai");
 
+
 contract('Private Invoice Factory Tests', function(accounts) {
     let ace;
     let zKerc20;
@@ -41,22 +42,44 @@ contract('Private Invoice Factory Tests', function(accounts) {
         );
     });
 
-    // it("Get proofData", async function() {
-    //     const notionalNote = await aztec.note.create(bob.publicKey, 100);
-    //     const { noteHash: notionalNoteHash } = notionalNote.exportNote();
 
-    //     const newTotalNote = await aztec.note.create(bob.publicKey, 100);
-    //     const oldTotalNote = await aztec.note.createZeroValueNote();
-    //     const { proofData } = aztec.proof.mint.encodeMintTransaction({ newTotalMinted: newTotalNote,
-    //                                                                    oldTotalMinted: oldTotalNote,
-    //                                                                    adjustedNotes: [notionalNote],
-    //                                                                    senderAddress: loanDappContract.address });
+    ///--------------------------------------------------------------------------///
 
-    //     return { notionalNoteHash, proofData };
-    // });
+    const getProofData = async function() {
+        const bobNote1 = await aztec.note.create(bob.publicKey, 100);
+
+        const newMintCounterNote = await aztec.note.create(bob.publicKey, 100);
+        const zeroMintCounterNote = await aztec.note.createZeroValueNote();
+        const sender = accounts[0];
+        const mintedNotes = [bobNote1];
+
+        const mintProof = new MintProof(   /// MintProof instance is called from aztec.js
+            zeroMintCounterNote,
+            newMintCounterNote,
+            mintedNotes,
+            sender
+        );
+
+        const mintData = mintProof.encodeABI();
+
+        const _proof = MINT_PROOF;
+        const _proofData = mintData;
+
+        return (_proof, _proofData);
+    }
+
+    it("Test of getting proofData", async function() {
+        var _proof;
+        var _proofData;
+
+        _proof, _proofData = await getProofData();
+    });
 
     it('Should be able to create a new privateInvoice', async () => {
-        const _proofData = await web3.utils.randomHex(32);
+        var _proof;
+        var _proofData;
+        _proof, _proofData = await getProofData();
+        //const _proofData = await web3.utils.randomHex(32);
         console.log('=== _proofData ===', _proofData);
 
         const _optionalMintProofId = 0;
