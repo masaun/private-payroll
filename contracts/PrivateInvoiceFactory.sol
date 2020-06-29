@@ -70,7 +70,7 @@ contract PrivateInvoiceFactory {
         PrivateInvoice privateInvoice = PrivateInvoice(address(newInvoice));
 
         privateInvoice.setProofs(1, uint256(-1));
-        privateInvoice.confidentialMint(MINT_PROOF, bytes(_proofData));
+        //privateInvoice.confidentialMint(MINT_PROOF, bytes(_proofData));
 
         return address(newInvoice);
     }
