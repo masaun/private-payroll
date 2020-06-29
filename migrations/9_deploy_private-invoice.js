@@ -1,5 +1,6 @@
 var PrivateInvoice = artifacts.require("PrivateInvoice");
 var IERC20 = artifacts.require("IERC20");
+var Dai = artifacts.require("Dai");
 const ACE = artifacts.require('./ACE.sol');
 const ZKERC20 = artifacts.require('./ZKERC20/ZKERC20.sol');
 //const ZkAsset = artifacts.require('./ZkAsset.sol');
@@ -11,7 +12,8 @@ var contractAddressList = require('./contractAddress/contractAddress.js');
 var tokenAddressList = require('./tokenAddress/tokenAddress.js');
 var walletAddressList = require('./walletAddress/walletAddress.js');
 
-const daiAddress = tokenAddressList["Kovan"]["DAI"];                /// DAI address on Rinkeby
+const daiAddress = Dai.address;
+//const daiAddress = tokenAddressList["Kovan"]["DAI"];
 const _aceAddress = ACE.address;
 const _zKerc20 = ZKERC20.address;
 //const _zkAsset = ZkAsset.address;

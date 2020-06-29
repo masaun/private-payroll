@@ -11,8 +11,9 @@ import "./storage/McModifier.sol";  /// McStorage.sol is inherited
 import "./storage/McConstants.sol";
 
 /// Aztec
-import "@aztec/protocol/contracts/interfaces/IZkAsset.sol";
+//import "@aztec/protocol/contracts/interfaces/IZkAsset.sol";
 
+/// Original
 import "./PrivateInvoice.sol";
 
 
@@ -20,14 +21,13 @@ import "./PrivateInvoice.sol";
 /***
  * @notice - This contract is that Private Salary Distributing System 
  **/
-contract PrivateInvoiceFactory is IZkAsset {
+contract PrivateInvoiceFactory {
 
     address[] public invoices;
 
     uint24 MINT_PROOF = 66049;
     uint24 BILATERAL_SWAP_PROOF = 65794;
 
-    IZkAsset public zkAsset;
     IERC20 public dai;
 
     constructor(address _daiAddress) public {
