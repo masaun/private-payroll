@@ -93,4 +93,9 @@ contract('Private Invoice Factory Tests', function(accounts) {
                                                   _proofData);
     });
 
+    it('Get Invoice Addresses List', async () => {
+        const sender = privateInvoiceFactory.address;
+        let invoiceAddressList = await privateInvoiceFactory.getInvoiceAddressList({ from: sender });
+        console.log('=== getInvoiceAddressList ===\n', invoiceAddressList);        
+    });
 })

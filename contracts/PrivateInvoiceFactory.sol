@@ -50,7 +50,6 @@ contract PrivateInvoiceFactory {
                                            _zkAsset,
                                            _proofData);
     }
-    
 
     function _createInvoice(
         address _daiAddress, 
@@ -75,5 +74,13 @@ contract PrivateInvoiceFactory {
         return address(newInvoice);
     }
 
+
+    /***
+     * @notice - Get specified invoice address
+     **/
+    function getInvoiceAddressList() public view returns(address[] memory invoiceAddressList) {
+        return invoices;
+    }
+    
 
 }
