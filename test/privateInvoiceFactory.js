@@ -127,22 +127,24 @@ contract('Private Invoice Factory Tests', function(accounts) {
             console.log('=== getInvoiceAddressList ===\n', invoiceAddressList);
 
 
-            /// Create instance of PrivateInvoice contract
+            /// Create instance of PrivateInvoice contract (by using web3.js)
             let PrivateInvoice = {};
             PrivateInvoice = require("../build/contracts/PrivateInvoice.json");
-
             let privateInvoice = null;
-            let PRIVATE_INVOICE_ADDRESS = invoiceAddressList[0];
+            let PRIVATE_INVOICE_ADDRESS = invoiceAddressList[0];  /// Using index 1 of PrivateInvoice address
             privateInvoice = new web3.eth.Contract(
                 PrivateInvoice.abi,
                 PRIVATE_INVOICE_ADDRESS,
             );
             //console.log('=== privateInvoice ===', privateInvoice);            
 
+            /// Call bobNote1
+            const bobNote1 = await aztec.note.create(bob.publicKey, 100);
+            const mintedNotes = [bobNote1];
 
-            // bob needs to pay sally for a taxi
-            // the taxi is 25
-            // if bob pays with his note worth 100 he requires 75 change
+            /// bob needs to pay sally for a taxi
+            /// the taxi is 25
+            /// if bob pays with his note worth 100 he requires 75 change
             console.log("Bob takes a taxi, Sally is the driver");
             const sallyTaxiFee = await aztec.note.create(sally.publicKey, 25);
 
@@ -152,9 +154,6 @@ contract('Private Invoice Factory Tests', function(accounts) {
             const withdrawPublicValue = 0;
             const publicOwner = PRIVATE_INVOICE_ADDRESS;
 
-            const bobNote1 = await aztec.note.create(bob.publicKey, 100);
-            const mintedNotes = [bobNote1];
-
             const sendProof = new JoinSplitProof(
                 mintedNotes,
                 [sallyTaxiFee, bobNote2],
@@ -163,23 +162,21 @@ contract('Private Invoice Factory Tests', function(accounts) {
                 publicOwner
             );
 
-            console.log('=== Test1 where are reached unitl ===');            
-
             const sendProofData = sendProof.encodeABI(PRIVATE_INVOICE_ADDRESS);
             const sendProofSignatures = sendProof.constructSignatures(
                 PRIVATE_INVOICE_ADDRESS,
                 [bob]
             );
 
-            console.log('=== Test2 where are reached unitl ===');            
-
             let res2 = await privateInvoice.methods["confidentialTransfer(uint24,bytes,bytes)"](
                 sendProofData,
                 sendProofSignatures,
                 {
-                    from: privateInvoice.address
+                    from: PRIVATE_INVOICE_ADDRESS
                 }
             );
+            //console.log('=== confidentialTransfer() ===', res2);            
+
 
             console.log("Bob paid sally 25 for the taxi and gets 75 back");
         });
