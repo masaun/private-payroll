@@ -93,6 +93,23 @@ contract('Private Invoice Factory Tests', function(accounts) {
                                                   _proofData);
     });
 
+    it('Should be able to create a new privateInvoice (=2nd time)', async () => {
+        var _proof;
+        var _proofData;
+        _proof, _proofData = await getProofData();
+        console.log('=== _proofData ===', _proofData);
+
+        const _optionalMintProofId = 0;
+        const _optionalInitialisationMint = [];
+
+        await privateInvoiceFactory.createInvoice(dai.address, 
+                                                  ace.address, 
+                                                  _optionalMintProofId, 
+                                                  _optionalInitialisationMint, 
+                                                  zKerc20.address, 
+                                                  _proofData);
+    });
+
     it('Get Invoice Addresses List', async () => {
         const sender = privateInvoiceFactory.address;
         let invoiceAddressList = await privateInvoiceFactory.getInvoiceAddressList({ from: sender });
