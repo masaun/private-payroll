@@ -80,8 +80,7 @@ contract('Private Invoice Factory Tests', function(accounts) {
         var _proof;
         var _proofData;
         _proof, _proofData = await getProofData();
-        //const _proofData = await web3.utils.randomHex(32);
-        console.log('=== _proofData ===', _proofData);
+        //console.log('=== _proofData ===', _proofData);
 
         const _optionalMintProofId = 0;
         const _optionalInitialisationMint = [];
@@ -92,9 +91,95 @@ contract('Private Invoice Factory Tests', function(accounts) {
                                                   _optionalInitialisationMint, 
                                                   zKerc20.address, 
                                                   _proofData);
-
-        //const firstLoanAddress = await loanDappContract.loans(0);
-        //assert.equal(firstLoanAddress > 0, true);
     });
 
+    it('Should be able to create a new privateInvoice (=2nd time)', async () => {
+        var _proof;
+        var _proofData;
+        _proof, _proofData = await getProofData();
+        //console.log('=== _proofData ===', _proofData);
+
+        const _optionalMintProofId = 0;
+        const _optionalInitialisationMint = [];
+
+        await privateInvoiceFactory.createInvoice(dai.address, 
+                                                  ace.address, 
+                                                  _optionalMintProofId, 
+                                                  _optionalInitialisationMint, 
+                                                  zKerc20.address, 
+                                                  _proofData);
+    });
+
+    it('Get Invoice Addresses List', async () => {
+        const sender = privateInvoiceFactory.address;
+        let invoiceAddressList = await privateInvoiceFactory.getInvoiceAddressList({ from: sender });
+        console.log('=== getInvoiceAddressList ===\n', invoiceAddressList);        
+    });
+
+
+
+    describe('Confidential Transfer', async () => {
+        it('Should be able to execute confidential transfer', async () => {
+            const sender = privateInvoiceFactory.address;
+            let invoiceAddressList = await privateInvoiceFactory.getInvoiceAddressList({ from: sender });
+            console.log('=== getInvoiceAddressList ===\n', invoiceAddressList);
+
+
+            /// Create instance of PrivateInvoice contract
+            let PrivateInvoice = {};
+            PrivateInvoice = require("../build/contracts/PrivateInvoice.json");
+
+            let privateInvoice = null;
+            let PRIVATE_INVOICE_ADDRESS = invoiceAddressList[0];
+            privateInvoice = new web3.eth.Contract(
+                PrivateInvoice.abi,
+                PRIVATE_INVOICE_ADDRESS,
+            );
+            //console.log('=== privateInvoice ===', privateInvoice);            
+
+
+            // bob needs to pay sally for a taxi
+            // the taxi is 25
+            // if bob pays with his note worth 100 he requires 75 change
+            console.log("Bob takes a taxi, Sally is the driver");
+            const sallyTaxiFee = await aztec.note.create(sally.publicKey, 25);
+
+            console.log("The fare comes to 25");
+            const bobNote2 = await aztec.note.create(bob.publicKey, 75);
+            const sendProofSender = PRIVATE_INVOICE_ADDRESS;
+            const withdrawPublicValue = 0;
+            const publicOwner = PRIVATE_INVOICE_ADDRESS;
+
+            const bobNote1 = await aztec.note.create(bob.publicKey, 100);
+            const mintedNotes = [bobNote1];
+
+            const sendProof = new JoinSplitProof(
+                mintedNotes,
+                [sallyTaxiFee, bobNote2],
+                sendProofSender,
+                withdrawPublicValue,
+                publicOwner
+            );
+
+            console.log('=== Test1 where are reached unitl ===');            
+
+            const sendProofData = sendProof.encodeABI(PRIVATE_INVOICE_ADDRESS);
+            const sendProofSignatures = sendProof.constructSignatures(
+                PRIVATE_INVOICE_ADDRESS,
+                [bob]
+            );
+
+            console.log('=== Test2 where are reached unitl ===');            
+
+            let res2 = await privateInvoice.methods["confidentialTransfer(uint24,bytes,bytes)"](
+                sendProofData,
+                sendProofSignatures,
+                {
+                    from: privateInvoice.address
+                }
+            );
+
+            console.log("Bob paid sally 25 for the taxi and gets 75 back");
+        });
+    });
 })

@@ -20,7 +20,6 @@ const PrivateInvoice = artifacts.require("./PrivateInvoice.sol");
 
 contract('Private Invoice Tests', function(accounts) {
     let privateInvoice;
-    //let privatePaymentContract;
     let bob;
     let sally;
 
@@ -28,7 +27,6 @@ contract('Private Invoice Tests', function(accounts) {
 
     it("Setup", async function() {
         privateInvoice = await PrivateInvoice.deployed();
-        //privatePaymentContract = await ZkAssetMintable.deployed();
 
         bob = secp256k1.accountFromPrivateKey(
             process.env.GANACHE_TESTING_ACCOUNT_0
@@ -59,7 +57,6 @@ contract('Private Invoice Tests', function(accounts) {
         const _proof = MINT_PROOF;
         const _proofData = mintData;
         let res1 = await privateInvoice.confidentialMint(_proof, _proofData, { from: accounts[0] });
-        //let res1 = await privatePaymentContract.confidentialMint(_proof, _proofData, { from: accounts[0] });
         //console.log('=== confidentialMint() ===\n', res1);
 
         console.log("completed mint proof");
@@ -88,10 +85,8 @@ contract('Private Invoice Tests', function(accounts) {
             publicOwner
         );
         const sendProofData = sendProof.encodeABI(privateInvoice.address);
-        //const sendProofData = sendProof.encodeABI(privatePaymentContract.address);
         const sendProofSignatures = sendProof.constructSignatures(
             privateInvoice.address,
-            //privatePaymentContract.address,
             [bob]
         );
 
@@ -102,16 +97,6 @@ contract('Private Invoice Tests', function(accounts) {
                 from: accounts[0]
             }
         );
-
-        // await privatePaymentContract.confidentialTransfer(sendProofData, sendProofSignatures, { from: accounts[0] });
-        // let res2 = await privatePaymentContract.methods["confidentialTransfer(bytes,bytes)"](
-        //     sendProofData,
-        //     sendProofSignatures,
-        //     {
-        //         from: accounts[0]
-        //     }
-        // );
-        //console.log('=== confidentialTransfer() ===', res);
 
         console.log("Bob paid sally 25 for the taxi and gets 75 back");
 
