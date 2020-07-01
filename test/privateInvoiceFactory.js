@@ -181,4 +181,16 @@ contract('Private Invoice Factory Tests', function(accounts) {
             console.log("Bob paid sally 25 for the taxi and gets 75 back");
         });
     });
+
+
+    describe('Withdraw DAI from zkDAI', async () => {
+        it('Check balance zkDAI', async () => {
+            
+        });
+
+        it('Withdraw', async () => {});
+
+        it('Check balance DAI', async () => {});
+    });
+
 })
