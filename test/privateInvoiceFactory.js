@@ -28,6 +28,14 @@ contract('Private Invoice Factory Tests', function(accounts) {
     let bob;
     let sally;
 
+    let bobWalletAddress;
+    let sallyWalletAddress;
+
+    it("Setup wallet address", async function() {
+        bobWalletAddress = accounts[0];
+        sallyWalletAddress = accounts[1];
+    });
+
     it("Setup", async function() {
         ace = await ACE.deployed();
         zKerc20 = await ZKERC20.deployed();
@@ -193,9 +201,22 @@ contract('Private Invoice Factory Tests', function(accounts) {
             // });
         });
 
-        it('Withdraw', async () => {});
+        it('Withdraw', async () => {
 
-        it('Check balance DAI', async () => {});
+
+        });
+
+        it('Check balance DAI', async () => {
+            let PRIVATE_INVOICE_ADDRESS = await privateInvoiceFactory.invoices(0);  /// Using array index 1 of PrivateInvoice addresses
+
+            let balance1 = await dai.balanceOf(bobWalletAddress);
+            let balance2 = await dai.balanceOf(sallyWalletAddress);
+            let balance3 = await dai.balanceOf(PRIVATE_INVOICE_ADDRESS);
+
+            console.log('=== DAI Balance of Bob ===', balance1);
+            console.log('=== DAI Balance of Sally ===', balance2);
+            console.log('=== DAI Balance of PrivateInvoice contract (index 0) ===', balance3);
+        });
     });
 
 })
