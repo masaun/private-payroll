@@ -201,7 +201,7 @@ contract('Private Invoice Factory Tests', function(accounts) {
           // withdraw
         const { proofData } = aztec.proof.joinSplit.encodeJoinSplitTransaction({
             inputNotes: [currentBobWalletBalance],
-            outputNotes: [withdrawNote, changeNote],
+            outputNotes: [withdrawNote, changeNote],  /// It's important to balance between left side and right side
             inputNoteOwners: [],
             senderAddress: PRIVATE_INVOICE_ADDRESS,
             publicOwner: bob.address,
