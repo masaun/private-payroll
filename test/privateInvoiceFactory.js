@@ -22,7 +22,7 @@ const Dai = artifacts.require("Dai");
 
 contract('Private Invoice Factory Tests', function(accounts) {
     let ace;
-    let zKerc20;
+    let zKerc20;  /// zkDAI
     let dai;
     let privateInvoiceFactory;
     let bob;
@@ -185,7 +185,12 @@ contract('Private Invoice Factory Tests', function(accounts) {
 
     describe('Withdraw DAI from zkDAI', async () => {
         it('Check balance zkDAI', async () => {
-            
+            let PRIVATE_INVOICE_ADDRESS = await privateInvoiceFactory.invoices(0);  /// Using array index 1 of PrivateInvoice addresses
+
+            /// In progress
+            // await zKerc20.confidentialApprove(noteHash, PRIVATE_INVOICE_ADDRESS, true, signature, {
+            //     from: PRIVATE_INVOICE_ADDRESS,
+            // });
         });
 
         it('Withdraw', async () => {});
