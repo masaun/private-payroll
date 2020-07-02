@@ -191,6 +191,26 @@ contract('Private Invoice Factory Tests', function(accounts) {
     });
 
 
+
+    let withdrawBalance = async (withdrawAmount) => {
+        const currentBobWalletBalance = 75;
+        let PRIVATE_INVOICE_ADDRESS = await privateInvoiceFactory.invoices(0);  /// Using array index 1 of PrivateInvoice addresses
+
+        const changeNote = await aztec.note.create(bob.publicKey, currentBobWalletBalance - withdrawAmount, PRIVATE_INVOICE_ADDRESS);
+        const withdrawNote = await aztec.note.create(bob.publicKey, withdrawAmount);
+          // withdraw
+        const { proofData } = aztec.proof.joinSplit.encodeJoinSplitTransaction({
+            inputNotes: [currentBobWalletBalance],
+            outputNotes: [withdrawNote, changeNote],
+            inputNoteOwners: [],
+            senderAddress: PRIVATE_INVOICE_ADDRESS,
+            publicOwner: bob.address,
+            kPublic: 0,
+        });
+
+        return proofData;
+    },
+
     describe('Withdraw DAI from zkDAI', async () => {
         it('Check balance zkDAI', async () => {
             let PRIVATE_INVOICE_ADDRESS = await privateInvoiceFactory.invoices(0);  /// Using array index 1 of PrivateInvoice addresses
@@ -201,9 +221,13 @@ contract('Private Invoice Factory Tests', function(accounts) {
             // });
         });
 
-        it('Withdraw', async () => {
+        it('Withdraw balance', async () => {
+            /// In progress
+            withdrawBalance(50);
+        });
 
-
+        it('Withdraw execution', async () => {
+            /// In progress
         });
 
         it('Check balance DAI', async () => {
