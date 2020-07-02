@@ -209,7 +209,7 @@ contract('Private Invoice Factory Tests', function(accounts) {
         });
 
         return proofData;
-    },
+    }
 
     describe('Withdraw DAI from zkDAI', async () => {
         it('Check balance zkDAI', async () => {
@@ -223,7 +223,7 @@ contract('Private Invoice Factory Tests', function(accounts) {
 
         it('Withdraw balance', async () => {
             /// In progress
-            withdrawBalance(50);
+            let proofData = await withdrawBalance(50);
         });
 
         it('Withdraw execution', async () => {
