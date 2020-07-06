@@ -4,7 +4,7 @@
 ## 【Introduction of Private Invoice】
 - This is a smart contract for realizing the private payroll.
   - Private payroll mean that sending/receiving salaries without revealing the amount in the middle of payments.
-  - Utilize Aztec-protocol for creating private payroll.
+  - Utilize Aztec-protocol (UTXO model) for creating private payroll.
 
 ***
 
@@ -58,6 +58,7 @@ $ npm run test:local
  
 
   - [Doc]：aztec.js
+    - UTXO model：https://docs.aztecprotocol.com/#/Introduction/UTXO%20model
     - API methons list：https://aztecprotocol.github.io/AZTEC/
     - a brief explanation： https://docs.aztecprotocol.com/#/aztec.js
 

@@ -150,13 +150,15 @@ contract('Private Invoice Factory Tests', function(accounts) {
             const bobNote1 = await aztec.note.create(bob.publicKey, 100);
             const mintedNotes = [bobNote1];
 
-            /// bob needs to pay sally for a taxi
-            /// the taxi is 25
-            /// if bob pays with his note worth 100 he requires 75 change
-            console.log("Bob takes a taxi, Sally is the driver");
+            /***
+             * Bob pay 25DAI for Sally as a payroll.
+             * Payroll amount is 25DAI
+             * if Bob pays with his note worth 100 he requires 75 change
+             **/
+            console.log("Bob is sender of payroll, Sally is receiver of payroll");
             const sallyTaxiFee = await aztec.note.create(sally.publicKey, 25);
 
-            console.log("The fare comes to 25");
+            console.log("The payroll amount of 25DAI is comes");
             const bobNote2 = await aztec.note.create(bob.publicKey, 75);
             const sendProofSender = PRIVATE_INVOICE_ADDRESS;
             const withdrawPublicValue = 0;
@@ -186,7 +188,7 @@ contract('Private Invoice Factory Tests', function(accounts) {
             //console.log('=== confidentialTransfer() ===', res2);            
 
 
-            console.log("Bob paid sally 25 for the taxi and gets 75 back");
+            console.log("Bob(Sender) paid 25DAI for Sally(Receiver) and Bob gets 75DAI back");
         });
     });
 
