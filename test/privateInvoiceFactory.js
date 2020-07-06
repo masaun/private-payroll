@@ -223,7 +223,8 @@ contract('Private Invoice Factory Tests', function(accounts) {
 
         it('Withdraw balance', async () => {
             /// In progress
-            let proofData = await withdrawBalance(50);
+            withdrawBalance(50);
+            //let proofData = await withdrawBalance(50);
         });
 
         it('Withdraw execution', async () => {
