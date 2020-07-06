@@ -1,63 +1,44 @@
-# Private Invoice
+# Private Payroll
 
 ***
 ## 【Introduction of Private Invoice】
-- This is a dApp that ...
-- Private invoices (i.e. for receiving / sending salaries). Obscuring payments between two parties without revealing the amount.
-
-&nbsp;
-
-## 【User Flow】
-
-&nbsp;
+- This is a smart contract for realizing the private payroll.
+  - Private payroll mean that sending/receiving salaries without revealing the amount in the middle of payments.
+  - Utilize Aztec-protocol (UTXO model) for creating private payroll.
 
 ***
 
-## 【Setup】
-### Setup wallet by using Metamask
-1. Add MetaMask to browser (Chrome or FireFox or Opera or Brave)    
-https://metamask.io/  
-
-
-2. Adjust appropriate newwork below 
+## Setup
+### ① Install modules
 ```
-Rinkeby Test Network
+$ npm install
 ```
 
-&nbsp;
+<br>
 
-
-### Setup backend
-1. Deploy contracts to Rinkeby Test Network
+### ② Run ganache-cli
+（Please make sure whether port number is `8545` or not）
 ```
-(root directory)
-
-$ npm run migrate:rinkeby
+$ ganache-cli
 ```
 
-&nbsp;
+<br>
 
-
-### Setup frontend
-1. Move to `./client`
+### ③ Compile contracts
 ```
-$ cd client
+$ npm run compile:local
 ```
 
-2. Add an `.env` file under the directory of `./client`.
-```
-$ cp .env.example .env
-```
+<br>
 
-3. Execute command below in root directory.
+### ④ Test contracts
 ```
-$ npm run client
+$ npm run test:local
 ```
-
-4. Access to browser by using link 
-```
-http://127.0.0.1:3000/tellor-chainrunner-project
-```
+- Testing flow and result:
+  - Bob pay 25DAI for Sally as a payroll.  
+  - Payroll amount is 25DAI.
+  - if Bob pays with his note worth 100 he requires 75 change.  
 
 &nbsp;
 
@@ -65,17 +46,22 @@ http://127.0.0.1:3000/tellor-chainrunner-project
 ***
 
 ## 【References】
-- 【Protect Privacy🔐Hackathon】at Gitcoin
+- [Protect Privacy Hackathon]  
   - Maker：https://gitcoin.co/issue/makerdao/community/585/4432
   - Keep：https://gitcoin.co/issue/keep-network/Protect-Privacy-Hackathon/1/4457
 
 <br>
 
-- [Aztec]
-  - aztec-ganache-starter-kit
-    https://github.com/AztecProtocol/aztec-ganache-starter-kit
+- [Aztec] 
+  - [Sample repos]  
+    - loan-dapp-starter-kit   
+      https://github.com/AztecProtocol/loan-dapp-starter-kit
+    - aztec-ganache-starter-kit  
+      https://github.com/AztecProtocol/aztec-ganache-starter-kit
+ 
 
   - [Doc]：aztec.js
+    - UTXO model：https://docs.aztecprotocol.com/#/Introduction/UTXO%20model
     - API methons list：https://aztecprotocol.github.io/AZTEC/
     - a brief explanation： https://docs.aztecprotocol.com/#/aztec.js
 

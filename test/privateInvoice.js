@@ -37,7 +37,7 @@ contract('Private Invoice Tests', function(accounts) {
     });
 
     it("Execute _confidentialMint()", async function() {
-        console.log("=== Bob wants to deposit 100 ===");
+        console.log("Bob wants to deposit 100");
         const bobNote1 = await aztec.note.create(bob.publicKey, 100);
 
         const newMintCounterNote = await aztec.note.create(bob.publicKey, 100);
@@ -65,13 +65,15 @@ contract('Private Invoice Tests', function(accounts) {
 
         // -------------------------------------------------------------------------- //
 
-        // bob needs to pay sally for a taxi
-        // the taxi is 25
-        // if bob pays with his note worth 100 he requires 75 change
-        console.log("Bob takes a taxi, Sally is the driver");
+        /***
+         * Bob pay 25DAI for Sally as a payroll.
+         * Payroll amount is 25DAI
+         * if Bob pays with his note worth 100 he requires 75 change
+         **/
+        console.log("Bob is sender of payroll, Sally is receiver of payroll");
         const sallyTaxiFee = await aztec.note.create(sally.publicKey, 25);
 
-        console.log("The fare comes to 25");
+        console.log("The payroll amount of 25DAI is comes");
         const bobNote2 = await aztec.note.create(bob.publicKey, 75);
         const sendProofSender = accounts[0];
         const withdrawPublicValue = 0;
@@ -98,7 +100,7 @@ contract('Private Invoice Tests', function(accounts) {
             }
         );
 
-        console.log("Bob paid sally 25 for the taxi and gets 75 back");
+        console.log("Bob(Sender) paid 25DAI for Sally(Receiver) and Bob gets 75DAI back");
 
     });
 
