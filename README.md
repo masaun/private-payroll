@@ -35,7 +35,10 @@ $ npm run compile:local
 ```
 $ npm run test:local
 ```
-
+- Testing flow and result:
+  - Bob pay 25DAI for Sally as a payroll.  
+  - Payroll amount is 25DAI.
+  - if Bob pays with his note worth 100 he requires 75 change.  
 
 &nbsp;
 
